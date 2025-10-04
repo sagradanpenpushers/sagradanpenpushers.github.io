@@ -302,8 +302,8 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    aspect-ratio: 16 / 9;
     width: 100%;
+    min-height: 300px;
     overflow: hidden;
 }
 
@@ -657,6 +657,7 @@ input[type="checkbox"] {
 @media (max-width: 834px) {
     .main-content {
         grid-template-columns: 1fr;
+        gap: 16px;
     }
 
     .controls {
@@ -665,10 +666,23 @@ input[type="checkbox"] {
 
     .preview-section {
         order: 1;
+        min-height: 280px;
     }
 
     .control-section {
         padding: 20px;
+    }
+
+    .language-toggle {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .lang-btn {
+        flex: 1;
+        max-width: 150px;
     }
 }
 
@@ -680,6 +694,11 @@ input[type="checkbox"] {
 
     .title {
         font-size: 2rem;
+        line-height: 1.3;
+    }
+
+    .subtitle {
+        font-size: 1.0625rem;
     }
 
     .upload-section,
@@ -689,6 +708,7 @@ input[type="checkbox"] {
 
     .preview-section {
         padding: 16px;
+        min-height: 250px;
     }
 
     .header {
@@ -699,26 +719,76 @@ input[type="checkbox"] {
     .upload-btn {
         padding: 14px 24px;
     }
+
+    .main-content {
+        gap: 16px;
+    }
 }
 
 
 @media (max-width: 480px) {
+    .container {
+        padding: 12px;
+    }
+
     .title {
         font-size: 1.5rem;
+        line-height: 1.3;
+    }
+
+    .subtitle {
+        font-size: 1rem;
     }
 
     .upload-section,
     .control-section {
         padding: 16px;
+        border-radius: 12px;
     }
 
     .preview-section {
         padding: 12px;
+        border-radius: 12px;
+    }
+
+    .section-title {
+        font-size: 1rem;
+        margin-bottom: 16px;
     }
 
     .btn {
         padding: 12px 20px;
         font-size: 0.875rem;
+    }
+
+    .upload-btn {
+        padding: 12px 20px;
+        font-size: 0.875rem;
+    }
+
+    .lang-btn {
+        padding: 8px 16px;
+        font-size: 0.8125rem;
+    }
+
+    .watermark-btn {
+        min-width: 100px;
+        padding: 8px 12px;
+        font-size: 0.8125rem;
+    }
+
+    .file-item {
+        padding: 8px 12px;
+        font-size: 0.8125rem;
+    }
+
+    .control-group label {
+        font-size: 0.8125rem;
+    }
+
+    input[type="color"] {
+        height: 48px;
+        border-radius: 24px;
     }
 }
 
