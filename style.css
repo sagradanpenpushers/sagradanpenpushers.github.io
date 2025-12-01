@@ -1,0 +1,451 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Patrick+Hand&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+}
+
+body {
+    font-family: 'Patrick Hand', 'Caveat', cursive;
+    background: linear-gradient(135deg, #f5f5dc 0%, #fff8f0 50%, #f5f5dc 100%);
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8b7355;
+    overflow: hidden;
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #a0826d;
+    font-weight: 700;
+}
+
+/* PIN Screen Styles */
+.pin-display {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.pin-dot {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #d4c5b9;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.pin-dot.filled {
+    background-color: #a0826d;
+    border-color: #a0826d;
+}
+
+.error-message {
+    color: #d4756d;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    min-height: 30px;
+}
+
+.pin-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.pin-btn {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.8em;
+    padding: 20px;
+    background-color: #fff;
+    border: 3px solid #d4c5b9;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #8b7355;
+    font-weight: 700;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.pin-btn:active:not(.empty) {
+    transform: scale(0.95);
+    background-color: #f5ebe0;
+}
+
+.pin-btn:focus {
+    outline: none;
+}
+
+.pin-btn.empty {
+    background-color: transparent;
+    border: none;
+    cursor: default;
+}
+
+.pin-btn.backspace {
+    font-size: 1.5em;
+}
+
+/* Puzzle Screen Styles */
+#puzzleScreen {
+    flex-direction: column;
+    padding: 30px;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#puzzleScreen h1 {
+    text-align: center;
+    margin: 0 0 20px 0;
+    font-size: 2.5em;
+    position: relative;
+    z-index: 100;
+    width: 100%;
+}
+
+#puzzleSVG {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+.puzzle-piece {
+    cursor: grab;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    transition: filter 0.2s;
+}
+
+.puzzle-piece.group {
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.puzzle-piece:active {
+    cursor: grabbing;
+}
+
+.puzzle-piece.in-place {
+    filter: drop-shadow(0 0 8px rgba(144, 238, 144, 0.6));
+}
+
+/* Question Screen Styles */
+.pleading-text {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    min-height: 50px;
+    color: #d4756d;
+}
+
+.button-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.answer-btn {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.5em;
+    padding: 15px 40px;
+    border-radius: 25px;
+    border: 3px solid;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    font-weight: 700;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.answer-btn:focus {
+    outline: none;
+}
+
+.yes-btn {
+    background-color: #fff;
+    border-color: #a0826d;
+    color: #a0826d;
+}
+
+.yes-btn:active {
+    background-color: #a0826d;
+    color: #fff;
+}
+
+.no-btn {
+    background-color: #fff;
+    border-color: #d4c5b9;
+    color: #8b7355;
+}
+
+.no-btn:active {
+    background-color: #f5ebe0;
+}
+
+/* Letter Screen Styles */
+#letterScreen.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f5dc 0%, #fff8f0 50%, #f5f5dc 100%);
+}
+
+.envelope-wrapper {
+    position: relative;
+    background: #f5ebe0;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.envelope-wrapper > .envelope {
+    position: relative;
+    width: 500px;
+    height: 350px;
+}
+
+.envelope-wrapper > .envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    border-top: 180px solid #d4c5b9;
+    border-right: 250px solid transparent;
+    border-left: 250px solid transparent;
+    transform-origin: top;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+.envelope-wrapper > .envelope::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    width: 0px;
+    height: 0px;
+    border-top: 180px solid transparent;
+    border-right: 250px solid #e6cfa7;
+    border-bottom: 170px solid #e6cfa7;
+    border-left: 250px solid #e6cfa7;
+    transition: z-index 0.1s 0.8s;
+}
+
+.envelope > .letter {
+    position: absolute;
+    right: 20%;
+    bottom: 0;
+    width: 54%;
+    height: 80%;
+    background: #fffef7;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 30px 20px;
+    border: 2px solid #d4c5b9;
+    z-index: 1;
+    transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.envelope > .letter > .text {
+    font-family: 'Caveat', cursive;
+    color: #6b5744;
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-y: auto;
+    max-height: 100%;
+    padding-right: 5px;
+    direction: ltr;
+}
+
+.envelope > .letter > .text::-webkit-scrollbar {
+    width: 6px;
+}
+
+.envelope > .letter > .text::-webkit-scrollbar-track {
+    background: rgba(212, 197, 185, 0.2);
+    border-radius: 3px;
+}
+
+.envelope > .letter > .text::-webkit-scrollbar-thumb {
+    background: #d4c5b9;
+    border-radius: 3px;
+}
+
+.envelope > .letter > .text::-webkit-scrollbar-thumb:hover {
+    background: #c4b5a0;
+}
+
+.envelope > .letter > .text p {
+    margin-bottom: 15px;
+}
+
+.envelope > .letter > .text p:last-child {
+    margin-bottom: 0;
+}
+
+.envelope > .letter > .text strong {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #8b7355;
+}
+
+.envelope > .letter > .text .signature {
+    margin-top: 15px;
+    text-align: right;
+    font-style: italic;
+    color: #a0826d;
+    font-size: 15px;
+}
+
+.heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: #d4756d;
+    z-index: 4;
+    transform: translate(-50%, -20%) rotate(45deg);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.heart:before,
+.heart:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #d4756d;
+    border-radius: 50%;
+}
+
+.heart:before {
+    top: -10px;
+}
+
+.heart:after {
+    right: 10px;
+}
+
+.envelope-wrapper.flap > .envelope::before {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.envelope-wrapper.flap > .envelope::after {
+    z-index: 0;
+}
+
+.envelope-wrapper.flap > .envelope > .letter {
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%) scale(1.8);
+    transition-delay: 0.8s;
+    width: 350px;
+    height: 450px;
+    padding: 40px 35px;
+    z-index: 10;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+}
+
+.envelope-wrapper.flap > .heart {
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition-delay: 0.3s;
+}
+
+/* Animations */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.screen.active {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes letterUpDown {
+    0% {
+        bottom: 0;
+        right: 20%;
+        transform: translate(0, 0) scale(1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    40% {
+        bottom: 150%;
+        right: 50%;
+        transform: translate(50%, 0) scale(1.5);
+        box-shadow: 0 15px 60px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+        bottom: 50%;
+        right: 50%;
+        transform: translate(50%, 50%) scale(1.8);
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+    }
+}
