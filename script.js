@@ -79,6 +79,10 @@ let allPieces = [];
 
 function initPuzzle() {
     const svg = document.getElementById('puzzleSVG');
+    if (!svg) {
+        console.error('puzzleSVG element not found');
+        return;
+    }
     svg.innerHTML = '';
     svg.setAttribute('width', '100%');
     svg.setAttribute('height', '100%');
@@ -584,6 +588,7 @@ function initQuestionScreen() {
 
     yesBtn.addEventListener('click', () => {
         showScreen('letterScreen');
+        playLoveSong();
     });
 
     noBtn.addEventListener('click', (e) => {
@@ -650,6 +655,10 @@ function positionButton(button, left, top) {
 // ==================== LETTER SCREEN ====================
 function initLetterScreen() {
     const envelopeWrapper = document.querySelector('.envelope-wrapper');
+    if (!envelopeWrapper) {
+        console.error('envelope-wrapper element not found');
+        return;
+    }
     let isOpened = false;
 
     envelopeWrapper.addEventListener('click', () => {
@@ -658,6 +667,16 @@ function initLetterScreen() {
             isOpened = true;
         }
     });
+}
+
+function playLoveSong() {
+    const audio = document.getElementById('loveSong');
+    if (audio) {
+        audio.volume = 0.3; // Set volume to 30%
+        audio.play().catch(err => {
+            console.log('Audio play failed:', err);
+        });
+    }
 }
 
 // Initialize on load
